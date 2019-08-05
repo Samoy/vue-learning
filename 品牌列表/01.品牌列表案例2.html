@@ -14,9 +14,10 @@
         </div>
         <div class="panel-body form-inline">
             <label>Id:<input class="form-control" type="text" v-model="id"></label>
-            <label>Name:<input class="form-control" type="text" v-model="name"></label>
+            <label>Name:<input class="form-control" type="text" v-model="name" @keyup.enter="add"></label>
             <input type="button" value="添加" class="btn btn-primary" @click="add">
-            <label>搜索名称关键字<input type="text" class="form-control" v-model="keyword"></label>
+            <!--注意：Vue中所有的指令，在调用的时候，都以v-开头-->
+            <label>搜索名称关键字<input v-focus v-color="'#0000ff'" type="text" class="form-control" v-model="keyword"></label>
         </div>
     </div>
 
@@ -40,7 +41,7 @@
     </table>
 </div>
 <div id="app2">
-    {{dt|dateFormat}}
+    <h3 v-fontweight="700" v-fontsize="'30px'">{{dt|dateFormat}}</h3>
 </div>
 <script>
   //过滤器的定义语法
@@ -53,6 +54,32 @@
       return dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate() + " " + dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
     }
   });
+  //为键盘上的键定义别名
+  Vue.config.keyCodes.f2 = 113;
+  //使用Vue.directive定义全局的指令，
+  //其中参数1是指令的名称，在定义的时候，指令的名称不需要v-前缀，在调用的时候必须使用v-前缀调用
+  //参数2是一个对象，在这个对象慎重，有一些指令相关的函数，这些函数可以在特定的阶段，进行相关的操作
+  Vue.directive('focus', {
+    //注意：在以下每个函数中，第一个参数永远是el，表示了绑定了执行的那个元素，这个el参数是一个原生的JS对象
+    //每当指令绑定到元素上的时候，会立即执行这个bind函数，只执行一次
+    bind: function (el) {
+      //在元素刚帮顶了指令的时候，还没有插入到dom中，这个时候调用focus方法没有作用
+    },
+    //inserted表示元素插入到dom中的时候，会执行inserted函数，只执行一次
+    inserted: function (el) {
+      el.focus();
+    },
+    updated: function (el) {//当VNode更新的时候，会执行updated，可能会触发多次
+
+    }
+  });
+
+  Vue.directive('color', {
+    bind: function (el, binding) {
+      el.style.color = binding.value
+    }
+  });
+
   var vm = new Vue({
     el: "#app",
     data: {
@@ -105,6 +132,17 @@
         } else {
           return dt.getFullYear() + "-" + (dt.getMonth() + 1).toString().padStart(2, '0') + "-" + dt.getDate().toString().padStart(2, '0') + " " + dt.getHours().toString().padStart(2, '0') + ":" + dt.getMinutes().toString().padStart(2, '0') + ":" + dt.getSeconds().toString().padStart(2, '0');
         }
+      }
+    },
+    directives: {//自定义私有指令
+      //注意：指令中不能含有大写字母
+      'fontweight': {
+        bind: function (el, binding) {
+          el.style.fontWeight = binding.value;
+        }
+      },
+      'fontsize': function (el, binding) {
+        el.style.fontSize = parseInt(binding.value) + 'px';
       }
     }
   });
