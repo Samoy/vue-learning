@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中的样式-class</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .thin {
+            font-weight: 200;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        .active {
+            letter-spacing: 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <h1 :class="['thin','red','italic']">这是一个很大很大的h1标签</h1> -->
+
+        <!-- 在数组中使用三元表达式 -->
+        <!-- <h1 :class="['thin','italic',flag?'active':'']">这是一个很大很大的h1标签</h1> -->
+
+        <!-- <h1 :class="['thin','italic',{'active':flag}]">这是一个很大很大的h1标签</h1> -->
+
+        <h1 :class="classObj">这是一个很大很大的h1标签</h1>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                flag: true,
+                classObj: { red: true, thin: true, italic: true, active: false }
+            },
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>

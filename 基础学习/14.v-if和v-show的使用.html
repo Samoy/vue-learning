@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>v-if和v-show的使用</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="toggle" @click="flag=!flag">
+        <!-- v-if每次都会删除和创建元素 -->
+        <h3 v-if="flag">这是v-if控制的元素</h3>
+        <!-- v-show不会进行dom的删除操作，只会切换display:none的样式 -->
+        <h3 v-show="flag">这是v-show控制的元素</h3>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                flag: true
+            },
+            methods: {
+            }
+        });
+    </script>
+</body>
+
+</html>

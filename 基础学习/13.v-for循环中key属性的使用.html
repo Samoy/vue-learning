@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>v-for循环中key属性的使用</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <label>Id:<input v-model="id"></label>
+            <label>Name:<input v-model="name"></label>
+            <input type="button" value="添加" @click="add">
+        </div>
+        <!-- v-for循环的时候，key属性只能是number或者string -->
+        <!-- key属性只能用v-bind形式 -->
+        <p v-for="item in list" :key="item.id">
+            <input type="checkbox">
+            {{item.id}}------{{item.name}}
+        </p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                id: "",
+                name: "",
+                list: [
+                    { id: 1, name: "李斯" },
+                    { id: 2, name: "嬴政" },
+                    { id: 3, name: "赵高" },
+                    { id: 4, name: "韩非" },
+                    { id: 5, name: "荀子" }
+                ]
+            },
+            methods: {
+                add() {
+                    this.list.unshift({
+                        id: this.id,
+                        name: this.name
+                    })
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

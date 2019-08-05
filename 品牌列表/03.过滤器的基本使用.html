@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03.过滤器的基本使用</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{ msg | msgFormat('邪恶') | test}}</p>
+</div>
+<script>
+  //定义过滤器
+  Vue.filter('msgFormat', function (msg, args) {
+    return msg.replace(/单纯/g, args);
+  });
+
+  Vue.filter('test', function (msg) {
+    return msg + '====';
+  });
+  var vm = new Vue({
+    el: "#app",
+    data: {
+      msg: '曾经，我也是一个单纯的少年，单纯的我，傻傻的问，谁是世界上最单纯的男人'
+    },
+    methods: {}
+  });
+</script>
+</body>
+</html>

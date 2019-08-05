@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>简易的计算器</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="n1">
+        <select v-model="opt">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="text" v-model="n2">
+        <input type="button" value="=" @click="calc">
+        <input type="text" v-model="result">
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                n1: 0,
+                n2: 0,
+                result: 0,
+                opt: "+"
+            },
+            methods: {
+                calc() {
+                    var codeStr = "Number(this.n1)" + this.opt + "Number(this.n2)";
+                    this.result = eval(codeStr);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

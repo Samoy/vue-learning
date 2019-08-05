@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>v-for循环对象</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 注意，在遍历对象身上的键值对的时候，除了key和value，在第三个位置还有一个索引值 -->
+        <p v-for="(val,key) in user">
+            {{key}}:{{val}}
+        </p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                user:{
+                    id:1,
+                    name:"李华",
+                    gender:"男"
+                }
+            },
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>
