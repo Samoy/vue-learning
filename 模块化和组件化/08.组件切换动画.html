@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>08.组件切换动画</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .v-enter, .v-leave-to {
+            opacity: 0;
+            transform: translateX(150px);
+        }
+
+        .v-enter-active, .v-leave-active {
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <a href="" @click.prevent="compName='login'">登录</a>
+    <a href="" @click.prevent="compName='register'">注册</a>
+    <!--    <login v-if="flag"></login>-->
+    <!--    <register v-else="flag"></register>-->
+    <!--    component是一个占位符，:is属性，可以指定要展示的组件名称-->
+    <!--    通过mode属性设置组件的切换时候的行为-->
+    <transition mode="out-in">
+        <component :is="compName"></component>
+    </transition>
+</div>
+<script>
+  Vue.component('login', {template: '<h3>登录组件</h3>'});
+  Vue.component('register', {template: '<h3>注册组件</h3>'});
+  var vm = new Vue({
+    el: "#app",
+    data: {
+      compName: 'login'
+    },
+    methods: {}
+  });
+</script>
+</body>
+</html>

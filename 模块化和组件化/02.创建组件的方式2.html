@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02.创建组件的方式2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-com2/>
+</div>
+<script>
+  Vue.component('myCom2', {
+    template: '<div><h3>这是直接使用Vue.component创建出来的组件</h3><span>123</span></div>'
+  });
+  var vm = new Vue({
+    el: "#app",
+    data: {},
+    methods: {}
+  });
+</script>
+</body>
+</html>

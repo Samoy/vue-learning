@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01.创建组件的方式1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--    如果要使用组件，直接把组件的名称以html标签形式引入到页面中即可-->
+    <!--    注意：组件注册时候若使用驼峰命名，引用的时候需要用"-"分隔-->
+    <my-com1/>
+</div>
+<script>
+  //使用Vue.extend来创建全局的Vue组件
+  var com1 = Vue.extend({
+    template: '<h3>这是使用Vue.extend创建的组件</h3>'
+  });
+  //使用Vue.component('组件的名称',创建出来的模板对象)
+  Vue.component('myCom1', com1);
+
+  var vm = new Vue({
+    el: "#app",
+    data: {},
+    methods: {}
+  });
+</script>
+</body>
+</html>

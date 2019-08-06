@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04.组件中的data和methods</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <mycom1/>
+</div>
+<script>
+  //1.组件可以有自己的data数据,
+  //2.组件的data必须为function，且该function需要返回一个对象
+  Vue.component('mycom1', {
+    template: '<h1>这是全局组件--{{msg}}</h1>',
+    data: function () {
+      return {
+        msg: "这是组件的data定义的数据"
+      }
+    }
+  });
+  var vm = new Vue({
+    el: "#app",
+    data: {},
+    methods: {}
+  });
+</script>
+</body>
+</html>

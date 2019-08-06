@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>09.父组件向子组件传值</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--    父组件可以在引用子组件的时候通过属性绑定的形式，把需要传递给子组件的数据以属性绑定的形式传递到子组件内部-->
+    <com1 :parent="msg"></com1>
+</div>
+<script>
+  var vm = new Vue({
+    el: "#app",
+    data: {
+      msg: '123---父组件中的数据'
+    },
+    methods: {},
+    components: {
+      //经过演示，发现子组件无法访问到父组件中数据和方法
+      com1: {
+        template: '<h1>这是子组件--{{parent}}</h1>',
+        props: ['parent']
+      }
+    }
+  });
+</script>
+</body>
+</html>
