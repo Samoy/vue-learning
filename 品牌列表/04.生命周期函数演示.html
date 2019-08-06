@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04.生命周期函数演示</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="修改" @click="msg='数据已被修改'">
+    <h3 id="h3">{{msg}}</h3>
+</div>
+<script>
+  var vm = new Vue({
+    el: "#app",
+    data: {
+      msg: 'ok'
+    },
+    methods: {
+      show() {
+        console.log('执行了show方法')
+      }
+    },
+    beforeCreate() {
+      //这是我们遇到的第一个生命周期函数，在实例还未初始化的时候就执行，
+      //在该周期函数上，data和methods都还未初始化
+      console.log(this.msg);
+    },
+    created() {
+      //这是遇到的第二个生命周期函数,此时data和methods都已经初始化完成
+      console.log(this.msg);
+      this.show();
+    },
+    beforeMount() {
+      //这是遇到的第三个生命周期函数，表示模板已经在内存中编译完成了，但是尚未把模板渲染到DOM中
+      //此时，页面中的元素中还没有被真正替换过来，只是之前写的模板字符串
+      console.log(document.getElementById('h3').innerText);
+    },
+    mounted() {
+      //这是遇到的第四个生命周期函数，将内存中编译好的模板真实的替换到浏览器页面中去,
+      //此时用户已经可以看到渲染好的页面了,
+      //这是实例创建期间的最后一个函数
+      console.log('mounted', document.getElementById('h3').innerText);
+    },
+    //接下来的是运行中的两个事件，
+    beforeUpdate() {//这个时候表示，我们的界面还未被更新，数据已经更新
+      console.log('beforeUpdate', document.getElementById('h3').innerText);
+    },
+    updated() {//这个时候表示界面已经被更新
+      console.log('updated', document.getElementById('h3').innerText);
+    },
+    //接下来的是销毁期间的两个事件
+    beforeDestroy() {
+
+    },
+    destroyed() {
+
+    }
+  });
+</script>
+</body>
+</html>
