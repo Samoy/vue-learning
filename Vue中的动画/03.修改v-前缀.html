@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03.修改v-前缀</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<style>
+    .v-enter, .v-leave-to {
+        opacity: 0;
+        transform: translateX(150px);
+    }
+
+    .v-enter-active, .v-leave-active {
+        transition: all 1s ease;
+    }
+
+    .my-enter, .my-leave-to {
+        opacity: 0;
+        transform: translateY(70px);
+    }
+
+    .my-enter-active, .my-leave-active {
+        transition: all 1s ease;
+    }
+</style>
+<body>
+<div id="app">
+    <input type="button" value="toggle" @click="flag=!flag">
+    <!--   需求：点击按钮，让h3显示，再点击，让h3隐藏-->
+    <!--    transition是vue官方提供的标签-->
+    <transition>
+        <h3 v-if="flag">这是一个h3</h3>
+    </transition>
+    <hr>
+    <input type="button" value="toggle2" @click="flag2=!flag2">
+    <!--   需求：点击按钮，让h3显示，再点击，让h3隐藏-->
+    <!--    transition是vue官方提供的标签-->
+    <transition name="my">
+        <h6 v-if="flag2">这是一个h6</h6>
+    </transition>
+</div>
+<script>
+  var vm = new Vue({
+    el: "#app",
+    data: {
+      flag: false,
+      flag2: false
+    },
+    methods: {}
+  });
+</script>
+</body>
+</html>

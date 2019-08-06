@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04.使用第三方类实现动画</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="../lib/animate.css">
+</head>
+<body>
+<div id="app">
+    <input type="button" value="toggle" @click="flag=!flag">
+    <!--   需求：点击按钮，让h3显示，再点击，让h3隐藏-->
+    <!--    transition是vue官方提供的标签-->
+    <!--    <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut">-->
+    <!--        <h3 v-if="flag">这是一个h3</h3>-->
+    <!--    </transition>-->
+    <!--    使用:duration来统一设置入场和立场时候的动画时长-->
+    <transition enter-active-class="bounceIn" leave-active-class="bounceOut"
+                :duration="{enter:200,leave:400}">
+        <h3 v-if="flag" class="animated">这是一个h3</h3>
+    </transition>
+</div>
+<script>
+  var vm = new Vue({
+    el: "#app",
+    data: {
+      flag: false
+    },
+    methods: {}
+  });
+</script>
+</body>
+</html>
