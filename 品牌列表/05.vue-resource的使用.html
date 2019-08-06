@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05.vue-resource的使用</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="get请求" @click="getInfo">
+</div>
+<script>
+  var vm = new Vue({
+    el: "#app",
+    data: {},
+    methods: {
+      getInfo() {
+        //会遇到跨域报错,不再演示post,jsonp等请求
+        this.$http.get('http://gank.io/api/today').then(function (result) {
+          console.log("结果", result);
+        }, function (error) {
+          console.log("错误", error);
+        })
+      }
+    }
+  });
+</script>
+</body>
+</html>

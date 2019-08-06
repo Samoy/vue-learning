@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06.客户端JSONP页面.html</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<script>
+  function showInfo(data) {
+    console.log(data)
+  }
+</script>
+<script src="http://127.0.0.1:3000/getscript?callback=showInfo"></script>
+</body>
+</html>
