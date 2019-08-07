@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04.路由的嵌套</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <router-link to="/account">account</router-link>
+    <router-view></router-view>
+</div>
+<template id="temp1">
+    <div>
+        <h1>这是account组件</h1>
+        <router-link to="/account/login">登录</router-link>
+        <router-link to="/account/register">注册</router-link>
+        <router-view></router-view>
+    </div>
+</template>
+<script>
+  var account = {
+    template: '#temp1'
+  };
+  var login = {
+    template: '<h1>登录</h1>'
+  };
+  var register = {
+    template: '<h1>注册</h1>'
+  };
+  var router = new VueRouter({
+    routes: [
+      {
+        path: '/account',
+        component: account,
+        //使用children属性，实现子路由，子路由的path前面不带"/"
+        children: [
+          {path: 'login', component: login},
+          {path: 'register', component: register}
+        ]
+      },
+    ],
+  });
+  var vm = new Vue({
+    el: "#app",
+    data: {},
+    methods: {},
+    router
+  });
+</script>
+</body>
+</html>
