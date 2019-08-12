@@ -1,2 +1,8 @@
 /.vscode/
 /.idea/
+*/package-lock.json
+*/node_modules/s
+*/yarn.lock
+/Vue深度学习/webpack-vue-router/node_modules/
+/Vue深度学习/webpack-vue/node_modules/
+/webpack-study/node_modules/

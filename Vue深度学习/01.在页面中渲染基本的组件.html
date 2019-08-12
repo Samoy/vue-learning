@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8">
+    <title>01.在页面中渲染基本的组件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+  var login = {
+    template: '<h1>这是登录组件</h1>'
+  };
+  var vm = new Vue({
+    el: "#app",
+    data: {},
+    methods: {},
+    render: function (createElements) {
+      return createElements(login)
+    }
+  });
+</script>
+</body>
+</html>
