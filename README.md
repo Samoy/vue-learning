@@ -52,3 +52,5 @@
 1. [在页面中渲染基本的组件](/Vue深度学习/01.在页面中渲染基本的组件.html)
 2. [在webpack中导入Vue](/Vue深度学习/webpack-vue)
 3. [结合webpack使用vue-router](/Vue深度学习/webpack-vue-router)
+## HTML5新特性
+1. [HTML5新特性](/HTML5新特性/index.html)

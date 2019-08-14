@@ -2,9 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>音频</title>
 </head>
+<style>
+    #div1 {
+        width: 300px;
+        height: 300px;
+        border: 1px solid #aaabbb;
+    }
+</style>
 <body>
-$END$
+<!--1.audio标签-->
+<audio src="raw/horse.ogg" controls>
+    <!--source标签表示播放资源-->
+    <source src="raw/horse.ogg">
+    <!--<source src="raw/horse.mp4"></source>-->
+</audio>
+<!--2.video标签-->
+<!--ffmpeg转码工具-->
+<video controls>
+    <source src="raw/movie.ogv">
+</video>
+<!--3.html5拖放-->
+<div>
+    <p>请拖放图片</p>
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <img id="drag1" width="200" height="200" src="images/test.jpg" draggable="true" ondragstart="drag(event)">
+</div>
+<script>
+  function allowDrop(event) {
+    event.preventDefault();
+  }
+
+  function drag(event) {
+    event.dataTransfer.setData("Text", event.target.id)
+  }
+
+  function drop(event) {
+    event.preventDefault();
+    var data = event.dataTransfer.getData("Text");
+    event.target.appendChild(document.getElementById(data));
+  }
+</script>
+<!--4.HTML5画布-->
+<canvas id="canvas" width="400px" height="400px"></canvas>
+<script>
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+  // ctx.fillStyle = "#ff0000";
+  // ctx.beginPath();
+  // ctx.arc(70, 60, 30, 0, Math.PI * 2);
+  // ctx.closePath();
+  // ctx.fill();
+  var img = new Image();
+  img.src = "images/test.jpg";
+  img.onload = function () {
+    ctx.drawImage(img, 0, 0);
+  };
+</script>
+<!--5.HTML5 SVG-->
+<svg viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="60" r="50"></circle>
+</svg>
 </body>
 </html>
