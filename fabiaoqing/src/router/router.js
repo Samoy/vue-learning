@@ -5,16 +5,17 @@ import Home from '../views/Home.vue'
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('@/views/About.vue')
+      path: '/search',
+      name: 'search',
+      component: () => import('@/views/Search.vue')
     }
   ]
 })
