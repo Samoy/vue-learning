@@ -4,5 +4,25 @@
  * @date 2019/8/28
  */
 import axios from "axios";
+import {Toast} from "vant";
+
+axios.defaults.timeout = 60 * 1000;
+axios.defaults.withCredentials = true;
+axios.interceptors.response.use(config => {
+  if (config.data.code !== 10000) {
+    Toast.fail({duration: 1000, message: config.data.message});
+  } else {
+    Toast.clear();
+  }
+  return config.data.data;
+}, error => {
+  Toast.fail({
+    duration: 1000,
+    message: "网络请求失败"
+  });
+  return Promise.reject(error);
+});
 //获取所有类别
-export let getCategories = axios.get('category/list');
+export let getCategories = () => axios.get('category/list');
+//根据类别获取表情包
+export let getPackages = (categoryId) => axios.get(`package/list?categoryId=${categoryId}`);

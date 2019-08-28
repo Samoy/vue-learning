@@ -6,9 +6,9 @@
                 @click-right="pushSearch">
             <Icon name="search" slot="right"/>
         </NavBar>
-        <Tabs>
+        <Tabs swipeable sticky>
             <Tab v-for="item in category.list" :key="item.objectId" :title="item.name">
-                你好
+                <PackageList :category-id="item.objectId"/>
             </Tab>
         </Tabs>
         <router-view></router-view>
@@ -18,14 +18,16 @@
 <script>
   import {NavBar, Icon, Tab, Tabs} from 'vant';
   import {mapActions, mapState} from 'vuex';
+  import {GET_CATEGORIES} from "../store/mutation-types";
+  import PackageList from "../components/PackageList";
 
   export default {
-    mounted: function () {
+    mounted: async function () {
       this.getCategories();
     },
     computed: mapState(['category']),
     methods: {
-      ...mapActions(['getCategories']),
+      ...mapActions([GET_CATEGORIES]),
       pushSearch: function () {
         this.$router.push('/search');
       }
@@ -34,7 +36,8 @@
       NavBar,
       Icon,
       Tabs,
-      Tab
+      Tab,
+      PackageList
     }
   }
 </script>

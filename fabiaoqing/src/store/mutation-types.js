@@ -5,3 +5,5 @@
  */
 //获取所有类别
 export let GET_CATEGORIES = "getCategories";
+//获取表情包
+export let GET_PACKAGES = "getPackages";

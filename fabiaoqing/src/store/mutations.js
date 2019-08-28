@@ -3,10 +3,13 @@
  * @email samoy_young@163.com
  * @date 2019/8/28
  */
-import {GET_CATEGORIES} from "./mutation-types";
+import {GET_CATEGORIES, GET_PACKAGES} from "./mutation-types";
 
 export let mutations = {
-  [GET_CATEGORIES](state, res) {
-    state.category.list = res.data.data
+  [GET_CATEGORIES](state, list) {
+    state.category.list = list;
+  },
+  [GET_PACKAGES](state, list) {
+    state.packages.list = list;
   }
 };
