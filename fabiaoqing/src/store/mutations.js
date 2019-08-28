@@ -1,8 +1,12 @@
 /**
  * @author Samoy
  * @email samoy_young@163.com
- * @date 2019/8/22
+ * @date 2019/8/28
  */
-export let mutations = {
+import {GET_CATEGORIES} from "./mutation-types";
 
+export let mutations = {
+  [GET_CATEGORIES](state, res) {
+    state.category.list = res.data.data
+  }
 };

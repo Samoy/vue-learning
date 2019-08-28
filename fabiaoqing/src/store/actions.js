@@ -1,18 +1,13 @@
 /**
  * @author Samoy
  * @email samoy_young@163.com
- * @date 2019/8/22
+ * @date 2019/8/28
  */
-import * as types from './types/mutation-types';
+import {GET_CATEGORIES} from "./mutation-types";
+import {getCategories} from "../api/api";
 
-function makeAction(type) {
-  return ({commit}, ...args) => commit(type, ...args)
-}
-
-let actions = {};
-
-Object.values(types).forEach((item) => {
-  actions[item] = makeAction(item)
-});
-
-export default actions;
+export let actions = {
+  async [GET_CATEGORIES]({commit}) {
+    commit(GET_CATEGORIES, await getCategories);
+  }
+};

@@ -1,20 +1,25 @@
 <template>
     <div>
-        <van-nav-bar
+        <NavBar
                 title="搜索"
                 left-arrow
                 @click-left="goBack">
-        </van-nav-bar>
+        </NavBar>
     </div>
 </template>
 
 <script>
+  import {NavBar} from 'vant';
+
   export default {
     name: "Search",
     methods: {
       goBack() {
         this.$router.back()
       }
+    },
+    components: {
+      NavBar
     }
   }
 </script>
