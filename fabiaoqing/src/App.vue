@@ -7,6 +7,13 @@
 </template>
 
 <script>
+  import {Notify} from 'vant';
+  window.onoffline = () => {
+    Notify({type: 'danger', message: '网络不可用', duration: 0});
+  };
+  window.ononline = () => {
+    Notify.clear();
+  };
   export default {
     name: 'app',
     data: function () {
