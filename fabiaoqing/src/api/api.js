@@ -25,4 +25,4 @@ axios.interceptors.response.use(config => {
 //获取所有类别
 export let getCategories = () => axios.get('category/list');
 //根据类别获取表情包
-export let getPackages = (categoryId) => axios.get(`package/list?categoryId=${categoryId}`);
+export let getPackages = (categoryId, page, pageSize) => axios.get(`package/list?categoryId=${categoryId}&page=${page}&pageSize=${pageSize}`);

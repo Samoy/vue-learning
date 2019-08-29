@@ -10,7 +10,9 @@ export let actions = {
   async [GET_CATEGORIES]({commit}) {
     commit(GET_CATEGORIES, await getCategories());
   },
-  async [GET_PACKAGES]({commit}, categoryId) {
-    commit(GET_PACKAGES, await getPackages(categoryId))
+  async [GET_PACKAGES]({commit}, {
+    categoryId, page = 1, pageSize = 10
+  }) {
+    commit(GET_PACKAGES, await getPackages(categoryId, page, pageSize))
   }
 };
