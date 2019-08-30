@@ -23,6 +23,8 @@ axios.interceptors.response.use(config => {
   return Promise.reject(error);
 });
 //获取所有类别
-export let getCategories = () => axios.get('category/list');
+export let getCategories = () => axios.get('/category/list');
 //根据类别获取表情包
-export let getPackages = (categoryId, page, pageSize) => axios.get(`package/list?categoryId=${categoryId}&page=${page}&pageSize=${pageSize}`);
+export let getPackages = (categoryId, page, pageSize) => axios.get(`/package/list?categoryId=${categoryId}&page=${page}&pageSize=${pageSize}`);
+//根据id获取表情包详情
+export let getPackageDetail = (packageId) => axios.get(`/package/list/detail?id=${packageId}`);

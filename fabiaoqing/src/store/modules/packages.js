@@ -4,5 +4,6 @@
  * @date 2019/8/28
  */
 export let packages = {
-  list: []
+  list: [],
+  detail: []
 };

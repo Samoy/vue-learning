@@ -15,8 +15,8 @@
                             <div class="list-images">
                                 <img
                                         alt="表情包"
-                                        @touchstart.prevent="touchStart"
-                                        @touchend.prevent="touchEnd(item.list,index)"
+                                        @touchstart="touchStart(item.list,index)"
+                                        @touchend="touchEnd"
                                         @click="onClickImage(item.name,item.objectId)"
                                         class="list-image" v-for="(image,index) in item.list" :key="image.objectId"
                                         :src="image.url"/>
@@ -44,7 +44,7 @@
         finished: false,
         refreshing: true,
         page: 0,
-        touchStartTime: 0,
+        timeout: null
       }
     },
     props: {
@@ -61,19 +61,12 @@
           }
         })
       },
-      touchStart() {
-        this.touchStartTime = new Date().getTime();
+      touchStart(list, index) {
+        this.timeout && clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => ImagePreview(list.map(item => item.url), index), 500)
       },
-      touchEnd(list, index) {
-        let touchEndTime = new Date().getTime();
-        /*
-            当超过500ms时，则认为是长按事件
-            另一种实现方式：在开始触摸的时候调用setTimeout(fn,500)
-            在结束触摸的时候清空定时器
-         */
-        if (touchEndTime - this.touchStartTime >= 500) {
-          ImagePreview(list.map(item => item.url), index)
-        }
+      touchEnd() {
+        this.timeout && clearTimeout(this.timeout);
       },
       async getPackageList() {
         await this.getPackages({

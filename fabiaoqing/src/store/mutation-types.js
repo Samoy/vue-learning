@@ -7,3 +7,5 @@
 export let GET_CATEGORIES = "getCategories";
 //获取表情包
 export let GET_PACKAGES = "getPackages";
+//获取表情包详情
+export let GET_PACKAGE_DETAIL = "getPackageDetail";
