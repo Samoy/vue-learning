@@ -2,7 +2,6 @@
     <div>
         <PullRefresh v-model="refreshing" @refresh="onRefresh">
             <List v-model="loading"
-                  :immediate-check="flag"
                   :finished="finished"
                   finished-text="没有更多了"
                   @load="onLoadMore">
@@ -14,10 +13,13 @@
                     <Cell>
                         <div slot="default">
                             <div class="list-images">
-                                <VanImage fit="cover"
-                                          @click="onClickImage(item.list,index)"
-                                          class="list-image" v-for="(image,index) in item.list" :key="image.objectId"
-                                          :src="image.url"/>
+                                <img
+                                        alt="表情包"
+                                        @touchstart.prevent="touchStart"
+                                        @touchend.prevent="touchEnd(item.list,index)"
+                                        @click="onClickImage(item.name,item.objectId)"
+                                        class="list-image" v-for="(image,index) in item.list" :key="image.objectId"
+                                        :src="image.url"/>
                             </div>
                         </div>
                     </Cell>
@@ -30,7 +32,7 @@
 <script>
   import {mapActions} from 'vuex';
   import {GET_PACKAGES} from "../store/mutation-types";
-  import {PullRefresh, List, CellGroup, Cell, Image as VanImage, ImagePreview} from 'vant';
+  import {PullRefresh, List, CellGroup, Cell, ImagePreview} from 'vant';
 
   //FIXME:切换页面时，List会滚动到顶部
   export default {
@@ -40,21 +42,38 @@
         list: [],
         loading: false,
         finished: false,
-        refreshing: false,
-        page: 1,
-        flag: false
+        refreshing: true,
+        page: 0,
+        touchStartTime: 0,
       }
-    },
-    mounted: async function () {
-      this.getPackageList()
     },
     props: {
       categoryId: String
     },
     methods: {
       ...mapActions([GET_PACKAGES]),
-      onClickImage(list, index) {
-        ImagePreview(list.map(item => item.url), index)
+      onClickImage(name, objectId) {
+        this.$router.push({
+          name: 'packageDetail',
+          params: {
+            name,
+            objectId
+          }
+        })
+      },
+      touchStart() {
+        this.touchStartTime = new Date().getTime();
+      },
+      touchEnd(list, index) {
+        let touchEndTime = new Date().getTime();
+        /*
+            当超过500ms时，则认为是长按事件
+            另一种实现方式：在开始触摸的时候调用setTimeout(fn,500)
+            在结束触摸的时候清空定时器
+         */
+        if (touchEndTime - this.touchStartTime >= 500) {
+          ImagePreview(list.map(item => item.url), index)
+        }
       },
       async getPackageList() {
         await this.getPackages({
@@ -85,7 +104,6 @@
     components: {
       List,
       Cell,
-      VanImage,
       CellGroup,
       PullRefresh
     }
@@ -108,11 +126,12 @@
 
     .list-images {
         width: 100%;
-        height: 100px;
+        display: flex;
+        justify-content: space-around;
     }
 
     .list-image {
-        width: calc(calc(100% - 32px) / 3);
+        width: 100px;
         height: 100px;
         padding: 0 4px 0 4px;
     }
