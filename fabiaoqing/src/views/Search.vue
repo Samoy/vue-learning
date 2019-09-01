@@ -1,10 +1,14 @@
 <template>
     <div>
-        <NavBar
-                title="搜索"
-                left-arrow
-                @click-left="goBack">
-        </NavBar>
+        <form action="/">
+            <VSearch
+                    v-model="keyword"
+                    placeholder="请输入搜索关键词"
+                    show-action
+                    @search="onSearch"
+                    @cancel="onCancel"
+            />
+        </form>
         <PullRefresh v-model="refreshing" @refresh="onRefresh">
             <List
                     v-model="loading"
@@ -23,7 +27,7 @@
 </template>
 
 <script>
-  import {NavBar, List, Cell, PullRefresh} from 'vant';
+  import {List, Cell, PullRefresh, Search as VSearch} from 'vant';
 
   export default {
     name: "Search",
@@ -32,7 +36,8 @@
         list: [],
         loading: false,
         finished: false,
-        refreshing: false
+        refreshing: false,
+        keyword: ""
       };
     },
     methods: {
@@ -57,19 +62,33 @@
           }
         }, 500);
       },
-      goBack() {
-        this.$router.back()
-      }
+      onSearch() {
+        console.log(this.keyword);
+      },
+      onCancel() {
+        this.$router.back();
+      },
     },
     components: {
-      NavBar,
       List,
       Cell,
-      PullRefresh
+      PullRefresh,
+      VSearch
     }
   }
 </script>
 
 <style scoped>
+    .nav-bar {
+        display: flex;
+        width: 100%;
+        flex: 1;
+        flex-direction: row;
+        align-items: center;
+        padding: 8px;
+    }
 
+    .nav-search {
+        color: red;
+    }
 </style>
