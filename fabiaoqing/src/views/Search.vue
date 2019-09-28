@@ -4,30 +4,19 @@
             <VSearch
                     v-model="keyword"
                     placeholder="请输入搜索关键词"
+                    sticky
                     show-action
                     @search="onSearch"
                     @cancel="onCancel"
             />
         </form>
-        <PullRefresh v-model="refreshing" @refresh="onRefresh">
-            <List
-                    v-model="loading"
-                    :finished="finished"
-                    finished-text="没有更多了"
-                    @load="onLoad"
-            >
-                <Cell
-                        v-for="item in list"
-                        :key="item"
-                        :title="item"
-                />
-            </List>
-        </PullRefresh>
+        <PackageList ref="packageList" :keyword="keyword"/>
     </div>
 </template>
 
 <script>
-  import {List, Cell, PullRefresh, Search as VSearch} from 'vant';
+  import {Search as VSearch} from 'vant';
+  import PackageList from "../components/PackageList";
 
   export default {
     name: "Search",
@@ -41,38 +30,15 @@
       };
     },
     methods: {
-      onRefresh() {
-        setTimeout(() => {
-          this.$toast('刷新成功');
-          this.refreshing = false;
-        }, 500);
-      },
-      onLoad() {
-        // 异步更新数据
-        setTimeout(() => {
-          for (let i = 0; i < 10; i++) {
-            this.list.push(this.list.length + 1);
-          }
-          // 加载状态结束
-          this.loading = false;
-
-          // 数据全部加载完成
-          if (this.list.length >= 40) {
-            this.finished = true;
-          }
-        }, 500);
-      },
       onSearch() {
-        console.log(this.keyword);
+        this.$refs.packageList.onRefresh();
       },
       onCancel() {
         this.$router.back();
       },
     },
     components: {
-      List,
-      Cell,
-      PullRefresh,
+      PackageList,
       VSearch
     }
   }
@@ -86,9 +52,5 @@
         flex-direction: row;
         align-items: center;
         padding: 8px;
-    }
-
-    .nav-search {
-        color: red;
     }
 </style>

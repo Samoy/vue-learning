@@ -3,8 +3,8 @@
  * @email samoy_young@163.com
  * @date 2019/8/28
  */
-import {GET_CATEGORIES, GET_PACKAGE_DETAIL, GET_PACKAGES} from "./mutation-types";
-import {getCategories, getPackageDetail, getPackages} from "../api/api";
+import {GET_CATEGORIES, GET_PACKAGE_DETAIL, GET_PACKAGES, SEARCH_PACKAGES} from "./mutation-types";
+import {getCategories, getPackageDetail, getPackages, searchPackages} from "../api/api";
 
 export let actions = {
   async [GET_CATEGORIES]({commit}) {
@@ -17,5 +17,8 @@ export let actions = {
   },
   async [GET_PACKAGE_DETAIL]({commit}, {packageId}) {
     commit(GET_PACKAGE_DETAIL, await getPackageDetail(packageId));
+  },
+  async [SEARCH_PACKAGES]({commit}, {keyword, page = 1, pageSize = 10}) {
+    commit(SEARCH_PACKAGES, await searchPackages(keyword, page, pageSize));
   }
 };

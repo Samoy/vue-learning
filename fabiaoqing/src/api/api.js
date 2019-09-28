@@ -28,3 +28,5 @@ export let getCategories = () => axios.get('/category/list');
 export let getPackages = (categoryId, page, pageSize) => axios.get(`/package/list?categoryId=${categoryId}&page=${page}&pageSize=${pageSize}`);
 //根据id获取表情包详情
 export let getPackageDetail = (packageId) => axios.get(`/package/list/detail?id=${packageId}`);
+//根据关键字获取表情包
+export let searchPackages = (keyword, page, pageSize) => axios.get(`/package/list/search?keyword=${keyword}&page=${page}&pageSize=${pageSize}`);

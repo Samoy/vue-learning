@@ -3,6 +3,7 @@
         <NavBar
                 title="表情包详情"
                 left-arrow
+                fixed
                 @click-left="$router.back()">
         </NavBar>
         <h3>{{$route.params.name}}</h3>

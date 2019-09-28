@@ -9,3 +9,5 @@ export let GET_CATEGORIES = "getCategories";
 export let GET_PACKAGES = "getPackages";
 //获取表情包详情
 export let GET_PACKAGE_DETAIL = "getPackageDetail";
+//搜索表情包
+export let SEARCH_PACKAGES = "searchPackages";

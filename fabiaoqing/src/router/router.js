@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '../views/Home.vue';
 import About from '../views/About';
 import PackageDetail from "../views/PackageDetail";
+import Search from "../views/Search";
 
 Vue.use(Router);
 
@@ -22,7 +23,7 @@ export default new Router({
     {
       path: '/search',
       name: 'search',
-      component: () => import('@/views/Search.vue')
+      component:Search
     },
     {
       path: '/about',

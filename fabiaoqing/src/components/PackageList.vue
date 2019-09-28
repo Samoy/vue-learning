@@ -31,7 +31,7 @@
 
 <script>
   import {mapActions} from 'vuex';
-  import {GET_PACKAGES} from "../store/mutation-types";
+  import {GET_PACKAGES, SEARCH_PACKAGES} from "../store/mutation-types";
   import {PullRefresh, List, CellGroup, Cell, ImagePreview} from 'vant';
 
   //FIXME:切换页面时，List会滚动到顶部
@@ -44,14 +44,15 @@
         finished: false,
         refreshing: true,
         page: 0,
-        timeout: null
+        timeout: null,
       }
     },
     props: {
-      categoryId: String
+      categoryId: String,
+      keyword: String
     },
     methods: {
-      ...mapActions([GET_PACKAGES]),
+      ...mapActions([GET_PACKAGES, SEARCH_PACKAGES]),
       onClickImage(name, objectId) {
         this.$router.push({
           name: 'packageDetail',
@@ -69,10 +70,21 @@
         this.timeout && clearTimeout(this.timeout);
       },
       async getPackageList() {
-        await this.getPackages({
-          categoryId: this.categoryId,
-          page: this.page
-        });
+        if (!this.categoryId && !this.keyword) {
+          this.list = [];
+          this.refreshing = false;
+          this.loading = false;
+          return;
+        }
+        if (this.categoryId) {
+          await this.getPackages({
+            categoryId: this.categoryId,
+            page: this.page
+          });
+        }
+        if (this.keyword) {
+          await this.searchPackages({keyword: this.keyword, page: this.page})
+        }
         let list = this.$store.state.packages.list;
         if (this.refreshing) {
           this.list = list;
@@ -87,6 +99,8 @@
       },
       onRefresh() {
         this.page = 1;
+        this.list = [];
+        this.refreshing = true;
         this.getPackageList();
       },
       onLoadMore() {

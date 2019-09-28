@@ -6,7 +6,7 @@
                 @click-right="pushSearch">
             <Icon name="search" slot="right"/>
         </NavBar>
-        <Tabs swipeable sticky>
+        <Tabs  class="my-tab" swipeable sticky>
             <Tab v-for="item in category.list" :key="item.objectId" :title="item.name">
                 <PackageList :category-id="item.objectId"/>
             </Tab>
